@@ -1,1 +1,481 @@
-# vpnsieucap.shop
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VPN Siêu Cấp ☃️</title>
+
+<style>
+
+body{
+margin:0;
+font-family:-apple-system,Arial;
+background:linear-gradient(180deg,#060816,#0f1435);
+color:white;
+}
+
+.header{
+text-align:center;
+padding:40px 20px 20px;
+}
+
+.logo{
+display:inline-block;
+padding:10px 24px;
+border-radius:30px;
+background:linear-gradient(90deg,#7b5cff,#3fa9ff);
+font-weight:bold;
+}
+
+h1{
+font-size:34px;
+margin-top:20px;
+}
+
+.sub{
+color:#9aa0b5;
+}
+
+.tabs{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:25px;
+}
+
+.tabs button{
+background:#151a3a;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:20px;
+cursor:pointer;
+}
+
+.tabs button.active{
+background:linear-gradient(90deg,#7b5cff,#4ea1ff);
+}
+
+.container{
+max-width:850px;
+margin:auto;
+padding:20px;
+}
+
+.section{
+display:none;
+}
+
+.section.active{
+display:block;
+}
+
+.card{
+background:#141835;
+padding:20px;
+border-radius:15px;
+margin-bottom:18px;
+}
+
+.notice{
+background:#0f2c26;
+border:1px solid #29c28a;
+padding:16px;
+border-radius:12px;
+margin-bottom:18px;
+}
+
+.warning{
+background:#2a1616;
+border:1px solid #ff5e5e;
+padding:16px;
+border-radius:12px;
+margin-top:15px;
+}
+
+.button{
+display:block;
+text-align:center;
+padding:14px;
+border-radius:12px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+margin-top:12px;
+}
+
+.purple{background:linear-gradient(90deg,#7b5cff,#a66bff);}
+.blue{background:linear-gradient(90deg,#3fa9ff,#1fd1c2);}
+.green{background:linear-gradient(90deg,#2ecc71,#27ae60);}
+
+.step{
+margin-top:10px;
+color:#cfd2ff;
+}
+
+.img-row{
+display:flex;
+gap:12px;
+margin-top:15px;
+}
+
+.img-box{
+flex:1;
+text-align:center;
+}
+
+.img-box img{
+width:100%;
+border-radius:12px;
+}
+
+.img-caption{
+font-size:13px;
+color:#9aa0b5;
+margin-top:5px;
+}
+
+footer{
+text-align:center;
+padding:40px;
+color:#aaa;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+<div class="logo">VPN Siêu Cấp ☃️</div>
+
+<h1>Hướng dẫn sử dụng VPN</h1>
+
+<div class="sub">
+Tất cả những gì bạn cần biết để dùng VPN hiệu quả
+</div>
+
+<div class="tabs">
+<button class="active" onclick="openTab('buy',this)">🛒 Mua gói</button>
+<button onclick="openTab('download',this)">📥 Tải App</button>
+<button onclick="openTab('setup',this)">⚙️ Cài đặt</button>
+<button onclick="openTab('connect',this)">📶 Kết nối</button>
+</div>
+
+</div>
+<div id="connect" class="section">
+
+<div class="notice" style="background:#0f2d2a;border:1px solid #1f6f6a;padding:15px;border-radius:14px;margin-bottom:20px;">
+✅ Hướng dẫn này dành cho <b>gói Viettel 0Đ</b> – không cần Nền TikTok.
+</div>
+
+<div class="card" style="padding:20px;border-radius:18px;background:#0f1320;margin-bottom:20px;">
+
+<h3 style="margin-bottom:15px;">📶 Cách kết nối VPN</h3>
+
+<div style="margin-bottom:15px;">
+<b>Bước 1:</b> Mở app → chọn <b>Máy Chủ</b> → chọn <b>VPN VIP 0Đ</b> hoặc máy chủ khác
+</div>
+
+<img src="https://sieu-vpn.indevs.in/chonmaychu.jpg" style="width:70%;max-width:300px;border-radius:14px;margin:15px auto;display:block;">
+
+<div style="margin-bottom:15px;">
+<b>Bước 2:</b> Quay lại trang chính → bấm <b>Chạm Để Bắt Đầu</b>
+</div>
+
+<div style="margin-bottom:15px;">
+<b>Bước 3:</b> Chờ vài giây → hiện <b>Đã Kết Nối</b> là thành công ✅
+</div>
+
+<img src="https://sieu-vpn.indevs.in/daketnoi.jpg" style="width:70%;max-width:300px;border-radius:14px;margin:15px auto;display:block;">
+
+</div>
+
+
+<div class="card" style="padding:20px;border-radius:18px;background:#201217;border:1px solid #7a2b2b;margin-bottom:20px;">
+
+<h3>⚠️ VPN cần chạy nền</h3>
+
+<p>
+Đây là app VPN nên phải <b>để chạy nền</b>.  
+Nếu tắt hẳn app sẽ mất kết nối mạng.  
+Chỉ cần thoát app, <b>không đóng hoàn toàn</b>.
+</p>
+
+</div>
+
+
+<div class="card" style="padding:20px;border-radius:18px;background:#0f1320;margin-bottom:20px;">
+
+<h3>🔄 Cập nhật / Làm mới máy chủ</h3>
+
+<div style="margin-bottom:10px;">
+<b>Bước 1:</b> Trong trang chính hoặc sau khi đã kết nối → bấm vào <b>Máy Chủ</b>
+</div>
+
+<div style="margin-bottom:10px;">
+<b>Bước 2:</b> Bấm nút <b>Làm Mới</b> góc trên phải để tải danh sách server mới
+</div>
+
+<div style="margin-bottom:15px;">
+<b>Bước 3:</b> Chọn lại <b>VPN VIP 0Đ</b> → quay lại kết nối
+</div>
+
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+<img src="https://sieu-vpn.indevs.in/chonmaychu.jpg" style="width:40%;max-width:180px;border-radius:12px;">
+<img src="https://sieu-vpn.indevs.in/daketnoi.jpg" style="width:40%;max-width:180px;border-radius:12px;">
+</div>
+
+</div>
+
+
+<div style="background:#0f2a38;border:1px solid #1c5d7a;padding:15px;border-radius:14px;margin-bottom:20px;">
+💡 <b>Khi nào cần làm mới?</b> Khi không tìm thấy server, kết nối bị lỗi hoặc sau khi bật tắt máy bay.
+</div>
+
+
+<div class="card" style="padding:20px;border-radius:18px;background:#0f1320;">
+
+<h3>✅ Kết nối chậm / không ổn định</h3>
+
+<div style="margin-bottom:10px;">
+<b>1.</b> Vào <b>Máy Chủ</b> → bấm <b>Làm Mới</b> → chọn server ping thấp
+</div>
+
+<div style="margin-bottom:10px;">
+<b>2.</b> Ngắt kết nối → chờ 5 giây → kết nối lại
+</div>
+
+<div style="margin-bottom:10px;">
+<b>3.</b> Kiểm tra tín hiệu <b>4G Viettel</b>
+</div>
+
+<div>
+<b>4.</b> Nếu vẫn chậm → khởi động lại app
+</div>
+
+</div>
+
+</div>
+<div class="container">
+
+<!-- MUA GÓI -->
+
+<div id="buy" class="section active">
+
+<div class="card">
+
+<h3>Mua gói tại website chính thức</h3>
+
+<p>Truy cập website để xem các gói VPN và mua tài khoản.</p>
+
+<a class="button purple"
+href="https://vpnsieucap.shop"
+target="_blank">
+
+Truy cập website VPN Siêu Cấp☃️
+
+</a>
+
+</div>
+
+<div class="notice">
+<b>🇻🇳 Gói có chữ 0-Nền  </b>
+<p>Dành cho sim Viettel – không cần nền TikTok.</p>
+</div>
+
+<div class="card">
+<b>🇻🇳 Gói không có chữ 0-Nền </b>
+<p>Dành cho các sim Viettel, Vinaphone, Mobifone - cần gói nền Tiktok.</p>
+</div>
+
+<div class="warning">
+⚠ Không có chính sách hoàn tiền.
+</div>
+
+</div>
+
+
+<!-- TẢI APP -->
+
+<div id="download" class="section">
+
+<div class="card">
+
+<h3>🍎 iOS – iPhone & iPad</h3>
+
+<b>Cách 1 – Tải trực tiếp từ App Store</b>
+
+<a class="button blue"
+href="https://apps.apple.com/vn/app/platform-next-unlimited-vpn/id6741474000?l=vi"
+target="_blank">
+
+Tải Platform Next
+
+</a>
+
+</div>
+
+<div class="card">
+
+<b>Cách 2 – Cài qua TestFlight (Nếu App Platformnext cài qua appstore không sử dụng được)</b>
+
+<div class="step">1. Tải TestFlight</div>
+<div class="step">2. Không mở TestFlight</div>
+<div class="step">3. Bấm link cài app</div>
+
+<a class="button blue"
+href="https://apps.apple.com/vn/app/testflight/id899247664?l=vi"
+target="_blank">
+
+Bước 1: Tải TestFlight
+
+</a>
+
+<a class="button purple"
+href="https://testflight.apple.com/join/ntTf94hr"
+target="_blank">
+
+Bước 2: Mở link cài app
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>🤖 Android</h3>
+
+<a class="button green"
+href="https://vpnsieucap.shop/tai-app.html"
+target="_blank">
+
+Tải APK Android
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- CÀI ĐẶT -->
+
+<div id="setup" class="section">
+
+<div class="notice">
+✅ Hướng dẫn dành cho <b>gói Viettel 0Đ</b>
+</div>
+
+
+<div class="card">
+
+<h3>🛡 Bước 1: Chọn Bạn Có Mã Mời?</h3>
+
+<div class="img-row">
+
+<div class="img-box">
+<img src="https://sieu-vpn.indevs.in/anhnhapma1.jpg">
+<div class="img-caption">Mở app lần đầu</div>
+</div>
+
+<div class="img-box">
+<img src="https://sieu-vpn.indevs.in/anhnhapma2.jpg">
+<div class="img-caption">Chọn Bạn Có Mã Mời?</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🛡 Bước 2: Nhập mã mời</h3>
+
+<p>Bật <b>Bạn Có Mã Mời?</b> và nhập mã <b>vpn</b></p>
+
+<div class="warning">
+
+⚠ Nhập chính xác <b>vpn</b> (viết thường)
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🛡 Bước 3: Đăng nhập</h3>
+
+<div class="img-row">
+
+<div class="img-box">
+<img src="https://sieu-vpn.indevs.in/dangnhap.jpg">
+<div class="img-caption">Nhập email & mật khẩu</div>
+</div>
+
+<div class="img-box">
+<img src="https://sieu-vpn.indevs.in/dangngapxong.jpg">
+<div class="img-caption">Đăng nhập thành công</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>⚠ Nếu chưa nhập mã</h3>
+
+<p>Vào Cài đặt trong app → Chọn cách dùng VPN → nhập mã</p>
+
+<div class="img-row">
+
+<div class="img-box">
+<img src="https://sieu-vpn.indevs.in/cachnhapmakhitrongapp.jpg">
+<div class="img-caption">Cài đặt</div>
+</div>
+
+<div class="img-box">
+<img src="https://sieu-vpn.indevs.in/cachnhapmakhitrongapp1.jpg">
+<div class="img-caption">Chọn Bạn Có Mã Mời?</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+VPN Siêu Cấp ☃️ © 2026
+</footer>
+
+<script>
+
+function openTab(tab,btn){
+
+document.querySelectorAll(".section").forEach(e=>{
+e.classList.remove("active")
+})
+
+document.getElementById(tab).classList.add("active")
+
+document.querySelectorAll(".tabs button").forEach(e=>{
+e.classList.remove("active")
+})
+
+btn.classList.add("active")
+
+}
+
+</script>
+
+</body>
+</html>

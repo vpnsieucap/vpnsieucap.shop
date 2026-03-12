@@ -235,54 +235,86 @@ gap:6px;
 #buy h4 span{
 white-space:nowrap;
 }
-/* Thu nhỏ toàn bộ phần tải app */
+/* ===== Thu nhỏ giao diện tải app ===== */
+
 #download{
 font-size:13px;
+line-height:1.45;
 }
 
-/* tiêu đề iOS Android */
-#download h2{
-font-size:16px;
+/* Card iOS / Android */
+#download .card{
+padding:18px;
+border-radius:18px;
 }
 
+/* Icon hệ điều hành */
+#download .card-header{
+gap:12px;
+margin-bottom:12px;
+}
+
+#download .card-header h2{
+font-size:18px;
+}
+
+/* Box cách 1 */
+#download .notice{
+padding:10px 14px;
+border-radius:14px;
+font-size:13px;
+margin-bottom:14px;
+}
+
+/* Divider */
+#download hr{
+margin:18px 0;
+opacity:.2;
+}
+
+/* Tiêu đề cách 2 */
 #download h3{
-font-size:14px;
+font-size:15px;
+margin-bottom:10px;
 }
 
-/* mô tả */
-#download p{
-font-size:12px;
-line-height:1.4;
-}
-
-/* step 1 2 3 */
-#download .step-num{
-width:26px;
-height:26px;
+/* Step */
+#download .step-item{
+display:flex;
+gap:10px;
+margin-bottom:8px;
 font-size:13px;
 }
 
-#download .step-item{
-margin-bottom:8px;
+#download .step-num{
+width:24px;
+height:24px;
+border-radius:50%;
+font-size:12px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-/* nút tải */
-#download a{
-padding:12px 14px;
-font-size:14px;
-border-radius:14px;
+/* Nút tải */
+#download .download-btn{
+padding:13px 16px;
+border-radius:16px;
+font-size:15px;
+margin-top:10px;
 }
 
 /* chữ nhỏ trong nút */
-#download a div{
-font-size:11px !important;
+#download .download-btn span{
+font-size:11px;
+opacity:.85;
 }
 
-/* box xanh */
-#download .notice{
-padding:10px 14px;
-font-size:13px;
+/* khoảng cách section */
+#download .section{
+margin-bottom:22px;
 }
+  
 </style>
 </head>
 

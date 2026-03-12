@@ -293,19 +293,16 @@ margin:18px 0 !important;
 transform:scale(0.88);
 transform-origin:top center;
 }
-/* Fix nút step bị méo */
-
-#download div[style*="width:30px"]{
-width:26px !important;
-height:26px !important;
-min-width:26px !important;
+/* Fix nút step bị kéo méo */
+#download div[style*="width:30px;height:30px"]{
+flex:0 0 30px !important;
+width:30px !important;
+height:30px !important;
 
 display:flex !important;
 align-items:center !important;
 justify-content:center !important;
 
-font-size:12px !important;
-line-height:1 !important;
 border-radius:50% !important;
 }
   

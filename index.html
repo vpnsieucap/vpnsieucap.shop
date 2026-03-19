@@ -106,6 +106,15 @@ left:5px;
 .tab-arrow.right{
 right:5px;
 }
+.tab-arrow{
+opacity:1;
+transition:0.3s;
+}
+
+.tab-arrow.hide{
+opacity:0;
+pointer-events:none;
+}
 
 .container{
 max-width:850px;
@@ -388,19 +397,17 @@ Tất cả những gì bạn cần biết để dùng VPN hiệu quả
 
 <div class="tabs-wrap">
 
-<div class="tab-arrow left" onclick="scrollTabs(-150)">❮</div>
+<div class="tab-arrow left" id="arrowLeft" onclick="scrollTabs(-150)">❮</div>
 
 <div class="tabs" id="tabs">
-
 <button class="active" onclick="openTab('buy',this)">🛒 Mua gói</button>
 <button onclick="openTab('tv360',this)">🇻🇳 NỀN TV360</button>
 <button onclick="openTab('download',this)">📥 Tải App</button>
 <button onclick="openTab('setup',this)">⚙️ Cài đặt</button>
 <button onclick="openTab('connect',this)">📶 Kết nối</button>
-
 </div>
 
-<div class="tab-arrow right" onclick="scrollTabs(150)">❯</div>
+<div class="tab-arrow right" id="arrowRight" onclick="scrollTabs(150)">❯</div>
 
 </div>
 <div id="connect" class="section">
@@ -1060,7 +1067,34 @@ e.classList.remove("active")
 btn.classList.add("active")
 
 }
+const tabs = document.getElementById("tabs");
+const leftArrow = document.getElementById("arrowLeft");
+const rightArrow = document.getElementById("arrowRight");
 
+function checkArrows(){
+const scrollLeft = tabs.scrollLeft;
+const maxScroll = tabs.scrollWidth - tabs.clientWidth;
+
+// Ẩn trái
+if(scrollLeft <= 5){
+leftArrow.classList.add("hide");
+}else{
+leftArrow.classList.remove("hide");
+}
+
+// Ẩn phải
+if(scrollLeft >= maxScroll - 5){
+rightArrow.classList.add("hide");
+}else{
+rightArrow.classList.remove("hide");
+}
+}
+
+// Khi scroll
+tabs.addEventListener("scroll", checkArrows);
+
+// Khi load
+window.addEventListener("load", checkArrows);
 </script>
 
 </body>

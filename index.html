@@ -39,32 +39,52 @@ color:#9aa0b5;
 
 .tabs{
 display:flex;
-gap:10px;
+gap:8px;
 margin-top:25px;
 
-overflow-x:auto;          /* cho phép kéo ngang */
-white-space:nowrap;       /* không xuống dòng */
-padding:0 10px;
+overflow-x:auto;
+padding:8px;
 
-scroll-behavior:smooth;
+background:rgba(255,255,255,0.05);
+border-radius:999px;
+
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
+
+max-width:600px;
+margin-left:auto;
+margin-right:auto;
 }
 
 .tabs::-webkit-scrollbar{
-display:none;             /* ẩn thanh scroll cho đẹp */
+display:none;
 }
 
 .tabs button{
-background:#151a3a;
-color:white;
-border:none;
-padding:12px 18px;
-border-radius:20px;
-cursor:pointer;
 flex:0 0 auto;
+
+border:none;
+padding:10px 16px;
+border-radius:999px;
+
+background:transparent;
+color:#cfd2ff;
+
+font-weight:600;
+font-size:14px;
+
+cursor:pointer;
+transition:0.25s;
 }
 
 .tabs button.active{
 background:linear-gradient(90deg,#7b5cff,#4ea1ff);
+color:white;
+
+box-shadow:0 6px 20px rgba(123,92,255,.5);
+}
+.tabs button:hover{
+color:white;
 }
 
 .container{

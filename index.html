@@ -39,12 +39,15 @@ color:#9aa0b5;
 
 .tabs-wrap{
 position:relative;
-width:100%;   /* full màn hình */
-margin-top:25px;
+max-width:600px;   /* 👈 giống phần dưới */
+margin:25px auto 0;
+width:100%;
 }
 
 /* Thanh cuộn */
 .tabs{
+width:100%;
+box-sizing:border-box;
 display:flex;
 gap:10px;
 overflow-x:auto;

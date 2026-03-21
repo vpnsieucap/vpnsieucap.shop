@@ -45,7 +45,7 @@ color:#ffffff;
 /* Glow nhẹ */
 text-shadow:0 0 6px rgba(123,92,255,.4);
 
-/* Hiệu ứng sáng nhấp nháy nhẹ (KHÔNG bị lỗi) */
+/* Hiệu ứng sáng nhẹ */
 animation:glowPulse 1.8s ease-in-out infinite;
 }
 
@@ -53,19 +53,6 @@ animation:glowPulse 1.8s ease-in-out infinite;
 0%{opacity:0.7;}
 50%{opacity:1;}
 100%{opacity:0.7;}
-}
-
-.arrow-text::after{
-content:" →";
-margin-left:6px;
-display:inline-block;
-animation:arrowPulse 1s infinite;
-}
-
-@keyframes arrowPulse{
-0%{transform:translateX(0);opacity:0;}
-50%{transform:translateX(6px);opacity:1;}
-100%{transform:translateX(12px);opacity:0;}
 }
 
 .tabs-wrap{
@@ -413,27 +400,6 @@ transform-origin:top center;
 transform:scale(0.95);
 transform-origin:top center;
 }
-.arrow-text{
-position:relative;
-padding-right:20px;
-}
-
-/* mũi tên chạy */
-.arrow-text::after{
-content:"→→→";
-position:absolute;
-right:-5px;
-top:0;
-animation:arrowMove 1.2s infinite;
-color:#4ea1ff;
-text-shadow:0 0 8px rgba(78,161,255,.7);
-}
-
-@keyframes arrowMove{
-0%{transform:translateX(0);opacity:0.3;}
-50%{transform:translateX(6px);opacity:1;}
-100%{transform:translateX(12px);opacity:0;}
-}
   
 </style>
 </head>
@@ -447,10 +413,7 @@ text-shadow:0 0 8px rgba(78,161,255,.7);
 <h1>Hướng dẫn sử dụng VPN</h1>
 
 <div class="sub">
-👉 XEM HƯỚNG DẪN TẠI: 
-<span class="arrow-text">
-TẢI APP → CÀI ĐẶT → KẾT NỐI
-</span>
+👉 XEM HƯỚNG DẪN TẠI: TẢI APP → CÀI ĐẶT → KẾT NỐI
 </div>
 
 <div class="tabs-wrap">

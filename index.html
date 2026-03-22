@@ -415,7 +415,7 @@ text-shadow:0 0 8px rgba(255,123,0,.5);
 }
 /* Thu nhỏ toàn bộ wifi */
 #wifi{
-transform:scale(0.92);
+transform:scale(0.95);
 transform-origin:top center;
 }
 
@@ -450,15 +450,29 @@ height:36px !important;
 font-size:18px !important;
 }
 
-/* Ảnh */
-#wifi img{
-max-width:260px;
+#wifi .img-box{
+text-align:center;
+flex:1;
+max-width:160px;
+margin:auto;
+}
+
+#wifi .img-box img{
+width:100%;
+max-width:180px; /* 👈 chỉnh ở đây */
+margin:auto;
+display:block;
+border-radius:12px;
 }
 
 /* Caption ảnh */
 #wifi .img-caption{
-font-size:12px;
-opacity:.85;
+font-size:11px;
+color:#cfd2ff;
+margin-top:5px;
+font-weight:500;
+text-align:center;
+text-shadow:0 0 4px rgba(123,92,255,.5);
 }
   
 </style>
@@ -1247,7 +1261,7 @@ Cuộn xuống → tìm mục <b>Proxy</b> → chọn <b>Thủ công</b>
 </div>
 </div>
 
-<div style="display:flex;gap:10px;justify-content:center;margin-top:15px;">
+<div style="display:flex;gap:10px;justify-content:center;">
 
   <div class="img-box">
     <img src="https://sieu-vpn.indevs.in/benmaynhan1.png">

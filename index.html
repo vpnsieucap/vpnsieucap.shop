@@ -1,473 +1,1434 @@
 <!DOCTYPE html>
-<html lang="vi" class="dark">
-
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hướng Dẫn 4G & VPN</title>
-  <!-- Vue 3 -->
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <!-- Tailwind CSS v4 -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <!-- FontAwesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Plus Jakarta Sans for a premium feel -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style type="text/tailwindcss">
-    @theme {
-      --font-sans: "Plus Jakarta Sans", sans-serif;
-      --color-background: #09090b;
-      --color-surface: #18181b;
-      --color-surfaceHighlight: #27272a;
-      --color-border: #3f3f46;
-      --color-primary: #3b82f6;
-      --color-primaryDark: #2563eb;
-      --color-textMain: #f4f4f5;
-      --color-textMuted: #a1a1aa;
-      --animate-fade-in: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      --animate-slide-up: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-    @keyframes slideUp {
-      0% { transform: translateY(10px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
+<title>VPN Siêu Cấp ☃️</title>
 
-    @layer utilities {
-      .glass-panel {
-        @apply bg-[var(--color-surface)]/50 backdrop-blur-2xl border border-white/5;
-      }
-      .card-hover {
-        @apply transition-all duration-300 hover:bg-white/5 hover:border-white/10 hover:shadow-lg hover:-translate-y-0.5;
-      }
-      [v-cloak] {
-        display: none !important;
-      }
-    }
-    body {
-      background-color: var(--color-background);
-      background-image: 
-        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%), 
-        radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.08), transparent 25%);
-    }
-    
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
+<style>
+
+body{
+margin:0;
+font-family:-apple-system,Arial;
+background:linear-gradient(180deg,#060816,#0f1435);
+color:white;
+font-size:14px;
+}
+
+.header{
+text-align:center;
+padding:40px 20px 20px;
+}
+
+.logo{
+display:inline-block;
+padding:10px 24px;
+border-radius:30px;
+background:linear-gradient(90deg,#7b5cff,#3fa9ff);
+font-weight:bold;
+}
+
+h1{
+font-size:34px;
+margin-top:20px;
+}
+
+.sub{
+margin-top:14px;
+font-weight:700;
+font-size:15px;
+letter-spacing:0.6px;
+display:inline-block;
+color:#ffffff;
+
+/* Glow nhẹ */
+text-shadow:0 0 6px rgba(123,92,255,.4);
+
+/* Hiệu ứng sáng nhẹ */
+animation:glowPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes glowPulse{
+0%{opacity:0.7;}
+50%{opacity:1;}
+100%{opacity:0.7;}
+}
+
+.tabs-wrap{
+position:relative;
+max-width:600px;   /* 👈 giống phần dưới */
+margin:25px auto 0;
+width:100%;
+}
+
+/* Thanh cuộn */
+.tabs{
+width:100%;
+box-sizing:border-box;
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:8px 35px; /* chừa chỗ cho mũi tên */
+scroll-behavior:smooth;
+
+background:rgba(255,255,255,0.03);
+border-radius:27px;
+
+-webkit-overflow-scrolling:touch;
+}
+
+/* Ẩn thanh scroll */
+.tabs::-webkit-scrollbar{
+display:none;
+}
+
+/* Button */
+.tabs button{
+flex:0 0 auto;
+background:#151a3a;
+color:white;
+border:none;
+padding:9px 14px;
+border-radius:16px;
+cursor:pointer;
+white-space:nowrap;
+font-size:13px;
+}
+
+.tabs button.active{
+background:linear-gradient(90deg,#7b5cff,#4ea1ff);
+}
+
+/* Mũi tên trái/phải */
+.tab-arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:24px;
+height:24px;
+border-radius:50%;
+background:rgba(255,255,255,0.08);
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-size:12px;
+z-index:10;
+backdrop-filter:blur(6px);
+}
+
+/* trái */
+.tab-arrow.left{
+left:3px;
+}
+
+/* phải */
+.tab-arrow.right{
+right:3px;
+}
+.tab-arrow{
+opacity:1;
+transition:0.3s;
+}
+
+.tab-arrow.hide{
+opacity:0;
+pointer-events:none;
+}
+
+.container{
+max-width:850px;
+margin:auto;
+padding:20px;
+}
+
+.section{
+display:none;
+}
+
+.section.active{
+display:block;
+}
+
+.card{
+background:#141835;
+padding:20px;
+border-radius:15px;
+margin-bottom:18px;
+}
+
+.notice{
+background:#0f2c26;
+border:1px solid #29c28a;
+padding:16px;
+border-radius:12px;
+margin-bottom:18px;
+}
+
+.warning{
+background:#2a1616;
+border:1px solid #ff5e5e;
+padding:16px;
+border-radius:12px;
+margin-top:15px;
+}
+
+.button{
+display:block;
+text-align:center;
+padding:14px;
+border-radius:12px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+margin-top:12px;
+}
+
+.purple{background:linear-gradient(90deg,#7b5cff,#a66bff);}
+.blue{background:linear-gradient(90deg,#3fa9ff,#1fd1c2);}
+.green{background:linear-gradient(90deg,#2ecc71,#27ae60);}
+
+.step{
+margin-top:10px;
+color:#cfd2ff;
+}
+
+.img-row{
+display:flex;
+gap:12px;
+margin-top:15px;
+}
+
+.img-box{
+flex:1;
+text-align:center;
+}
+
+.img-box img{
+width:100%;
+border-radius:12px;
+}
+
+.img-caption{
+font-size:13px;
+color:#9aa0b5;
+margin-top:5px;
+}
+
+footer{
+text-align:center;
+padding:40px;
+color:#aaa;
+}
+.buy-card{
+background:linear-gradient(180deg,#151a3a,#0f132c);
+border:1px solid rgba(255,255,255,.08);
+border-radius:22px;
+padding:22px;
+margin-bottom:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+transition:0.25s;
+}
+
+.buy-card:hover{
+transform:translateY(-3px);
+box-shadow:0 20px 40px rgba(0,0,0,.6);
+}
+
+.buy-badge{
+padding:5px 12px;
+border-radius:20px;
+font-size:13px;
+font-weight:600;
+}
+
+.badge-green{
+background:#1f6f6a;
+}
+
+.badge-yellow{
+background:#7a5a1f;
+}
+
+.badge-red{
+background:#7a1f3d;
+}
+/* Thu nhỏ khu vực mua gói */
+#buy{
+max-width:680px;
+margin:auto;
+}
+
+/* Card trong mua gói */
+#buy > div{
+margin-left:6px;
+margin-right:6px;
+}
+
+/* Thu nhỏ nội dung */
+#buy h3{
+font-size:17px !important;
+}
+
+#buy h4{
+font-size:15px !important;
+}
+
+#buy p{
+font-size:13px !important;
+line-height:1.5;
+}
+/* chỉ chỉnh badge trong tiêu đề */
+#buy h4 span{
+padding:4px 10px;
+border-radius:999px;
+font-size:12px;
+font-weight:600;
+}
+
+#buy a div:first-child{
+font-size:15px !important;
+}
+
+#buy a div:last-child{
+font-size:11px !important;
+opacity:.85;
+}
+
+/* Card gọn hơn */
+#buy div[style*="padding:20px"]{
+padding:16px !important;
+}
+
+/* Bo tròn giống UI trong ảnh */
+#buy div[style*="border-radius:20px"]{
+border-radius:22px !important;
+}
+#buy h4{
+display:flex;
+align-items:center;
+flex-wrap:wrap;
+gap:6px;
+}
+
+#buy h4 span{
+white-space:nowrap;
+}
+/* ===== THU NHỎ PHẦN TẢI APP ===== */
+
+#download .card{
+padding:14px !important;
+border-radius:18px !important;
+}
+
+#download h2{
+font-size:18px !important;
+}
+
+#download h3{
+font-size:15px !important;
+}
+
+#download p{
+font-size:13px !important;
+}
+
+/* icon ios android */
+#download div[style*="width:46px"]{
+width:38px !important;
+height:38px !important;
+font-size:18px !important;
+}
+
+/* box xanh */
+#download div[style*="padding:15px"]{
+padding:12px !important;
+}
+
+/* step tròn */
+#download div[style*="width:30px"]{
+width:24px !important;
+height:24px !important;
+font-size:12px !important;
+}
+
+/* nút tải */
+#download a{
+padding:13px !important;
+font-size:14px !important;
+border-radius:14px !important;
+}
+
+#download a div{
+font-size:12px !important;
+}
+
+/* divider */
+#download div[style*="height:1px"]{
+margin:18px 0 !important;
+}
+/* Thu nhỏ toàn bộ phần tải app */
+#download{
+transform:scale(0.95);
+transform-origin:top center;
+}
+/* Fix nút step bị kéo méo */
+#download div[style*="width:30px;height:30px"]{
+flex:0 0 30px !important;
+width:30px !important;
+height:30px !important;
+
+display:flex !important;
+align-items:center !important;
+justify-content:center !important;
+
+border-radius:50% !important;
+}
+/* Thu nhỏ mục Cài đặt */
+#setup{
+transform:scale(0.95);
+transform-origin:top center;
+}
+
+/* Thu nhỏ mục Kết nối */
+#connect{
+transform:scale(0.95);
+transform-origin:top center;
+}
+#tv360{
+transform:scale(0.95);
+transform-origin:top center;
+}
+.highlight{
+font-weight:800;
+
+/* Gradient nổi bật */
+background:linear-gradient(90deg,#ff7b00,#ff3cac,#4ea1ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+/* Glow */
+text-shadow:0 0 8px rgba(255,123,0,.5);
+
+/* Nhẹ nhàng thôi cho không lỗi */
+}
+/* Thu nhỏ toàn bộ wifi */
+#wifi{
+transform:scale(0.95);
+transform-origin:top center;
+}
+
+/* Card nhỏ lại */
+#wifi .card{
+padding:16px !important;
+border-radius:18px !important;
+}
+
+/* Tiêu đề */
+#wifi h3{
+font-size:16px !important;
+}
+
+/* Text */
+#wifi p,
+#wifi div{
+font-size:13px !important;
+}
+
+/* Step tròn */
+#wifi div[style*="width:30px"]{
+width:24px !important;
+height:24px !important;
+font-size:12px !important;
+}
+
+/* Icon vuông */
+#wifi div[style*="width:42px"]{
+width:36px !important;
+height:36px !important;
+font-size:18px !important;
+}
+
+#wifi .img-box{
+text-align:center;
+flex:1;
+max-width:160px;
+margin:auto;
+}
+
+#wifi .img-box img{
+width:100%;
+max-width:180px; /* 👈 chỉnh ở đây */
+margin:auto;
+display:block;
+border-radius:12px;
+}
+
+/* Caption ảnh */
+#wifi .img-caption{
+font-size:11px;
+color:#cfd2ff;
+margin-top:5px;
+font-weight:500;
+text-align:center;
+text-shadow:0 0 4px rgba(123,92,255,.5);
+}
+  
+</style>
 </head>
 
-<body class="text-textMain min-h-screen flex flex-col selection:bg-primary/30 selection:text-white">
+<body>
 
-  <div id="app" v-cloak class="flex-grow flex flex-col items-center justify-center p-4 sm:p-6">
+<div class="header">
 
-    <!-- Main Layout -->
-    <div
-      class="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6 lg:gap-12 items-start relative z-10">
+<div class="logo">VPN Siêu Cấp ☃️</div>
 
-      <!-- Left Side: Header & Progress (Desktop Sticky) -->
-      <div class="lg:sticky lg:top-12 space-y-8 animate-fade-in lg:pt-8 text-center lg:text-left">
-        <!-- Branding -->
-        <div>
-          <div
-            class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-purple-600 mb-6 shadow-lg shadow-primary/20">
-            <i class="fas fa-bolt text-xl text-white"></i>
-          </div>
-          <h1
-            class="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 break-words">
-            VPNSIEUCAP.SHOP
-          </h1>
-          <p class="text-textMuted text-lg font-light leading-relaxed max-w-md mx-auto lg:mx-0">
-            Hướng dẫn kích hoạt gói cước 4G & VPN. <br class="hidden sm:block">Đơn giản, tự động & bảo mật.
-          </p>
-        </div>
+<h1>Hướng dẫn sử dụng VPN</h1>
 
-        <!-- Minimal Step Indicator -->
-        <div class="flex items-center justify-center lg:justify-start gap-3">
-          <template v-for="i in 6" :key="i">
-            <div class="h-1.5 rounded-full transition-all duration-500 ease-out"
-              :class="step >= i ? 'w-8 bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]' : 'w-2 bg-border'"></div>
-          </template>
-        </div>
+<div class="sub">
+XEM HƯỚNG DẪN TẠI: 
+<span class="highlight">
+TẢI APP → CÀI ĐẶT → KẾT NỐI
+</span>
+</div>
 
-        <!-- Back Button (Mobile only logic handled in template) -->
-        <button v-if="step > 1" @click="prevStep"
-          class="hidden lg:flex items-center gap-2 text-textMuted hover:text-white text-sm font-medium transition-colors pl-1">
-          <div
-            class="w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:border-white/20">
-            <i class="fas fa-arrow-left text-xs"></i>
-          </div>
-          <span class="tracking-wide">Quay lại bước trước</span>
-        </button>
-      </div>
+<div class="tabs-wrap">
 
-      <!-- Right Side: Content Area -->
-      <div class="w-full relative">
-        <transition name="fade" mode="out-in">
+<div class="tab-arrow left" id="arrowLeft" onclick="scrollTabs(-150)">❮</div>
 
-          <!-- Step 1: Start -->
-          <div v-if="step === 1" key="step1"
-            class="glass-panel p-8 sm:p-10 rounded-[2rem] shadow-2xl animate-fade-in flex flex-col items-center text-center space-y-8 min-h-[400px] justify-center">
-            <div
-              class="mb-6 inline-flex items-center justify-center w-24 h-24 rounded-full bg-blue-600/10 text-blue-500 animate-fade-in transition-transform hover:scale-105 duration-300">
-              <i class="fas fa-book-open text-4xl drop-shadow-md"></i>
-            </div>
+<div class="tabs" id="tabs">
+<button class="active" onclick="openTab('buy',this)">🛒 Mua gói</button>
+<button onclick="openTab('tv360',this)">🇻🇳 NỀN TV360</button>
+<button onclick="openTab('download',this)">📥 Tải App</button>
+<button onclick="openTab('setup',this)">⚙️ Cài đặt</button>
+<button onclick="openTab('connect',this)">📶 Kết nối</button>
+<button onclick="openTab('wifi',this)">🛜 Phát wifi</button>
+</div>
 
-            <div>
-              <h2 class="text-2xl font-semibold text-white mb-2">Hướng dẫn sử dụng</h2>
-              <p class="text-textMuted text-sm">Hướng dẫn sử dụng nhanh</p>
-            </div>
+<div class="tab-arrow right" id="arrowRight" onclick="scrollTabs(150)">❯</div>
 
-            <button @click="nextStep"
-              class="group relative px-8 py-4 bg-white text-black rounded-full font-semibold shadow-xl shadow-white/5 hover:shadow-white/10 hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto min-w-[200px]">
-              Bắt đầu ngay
-              <i class="fas fa-arrow-right ml-2 opacity-70 group-hover:translate-x-1 transition-transform"></i>
-            </button>
-          </div>
+</div>
+<div id="connect" class="section">
 
-          <!-- Step 2: Buy Status Check -->
-          <div v-else-if="step === 2" key="step2"
-            class="glass-panel p-8 sm:p-10 rounded-[2rem] shadow-2xl animate-fade-in flex flex-col items-center text-center space-y-8 min-h-[400px] justify-center">
-            <div
-              class="mb-6 inline-flex items-center justify-center w-24 h-24 rounded-full bg-primary/10 text-primary animate-fade-in transition-transform hover:scale-105 duration-300">
-              <i class="fas fa-shopping-bag text-4xl drop-shadow-md"></i>
-            </div>
+<div class="notice" style="background:#0f2d2a;border:1px solid #1f6f6a;padding:15px;border-radius:14px;margin-bottom:20px;">
+✅ Hướng dẫn này dành cho <b>gói TV360</b>.
+</div>
+<div class="notice" style="background:#0f2d2a;border:1px solid #1f6f6a;padding:15px;border-radius:14px;margin-bottom:20px;">
+‼️Lưu ý: Nhớ bật <b>dữ liệu di động - 4G/5G</b>
+</div>
 
-            <div class="space-y-3">
-              <h2 class="text-2xl font-bold text-white uppercase tracking-wider">Bạn đã mua gói chưa?</h2>
-              <p class="text-textMuted text-sm max-w-sm mx-auto">Để tiếp tục hướng dẫn, bạn cần có một gói cước 4G/VPN đang hoạt động.</p>
-            </div>
+<div class="card" style="padding:20px;border-radius:18px;background:#0f1320;margin-bottom:20px;">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
-                <button @click="step = 3"
-                    class="px-6 py-4 bg-primary text-white rounded-2xl font-bold shadow-lg shadow-primary/20 hover:bg-primaryDark transition-all active:scale-95">
-                    Đã mua rồi
-                </button>
-                <a href="https://5gsieutocdo.com" :href="adminLink" target="_blank"
-                    class="px-6 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold hover:bg-white/10 transition-all active:scale-95 flex items-center justify-center gap-2">
-                    Tôi chưa có gói <i class="fas fa-external-link-alt text-xs opacity-50"></i>
-                </a>
-            </div>
-          </div>
+<h3 style="margin-bottom:15px;">📶 Cách kết nối VPN</h3>
 
-          <!-- Step 3: SIM Selection -->
-          <div v-else-if="step === 3" key="step3"
-            class="glass-panel p-1 rounded-[2rem] shadow-2xl animate-slide-up overflow-hidden">
-            <div class="p-6 sm:p-8 space-y-6 bg-surfaceHighlight/30 rounded-[1.8rem]">
-              <div class="flex justify-between items-center mb-2">
-                <h3 class="text-xl font-semibold">Chọn gói cước</h3>
-                <span class="text-xs font-mono px-2 py-1 rounded bg-white/5 text-textMuted">NỀN TIKTOK</span>
-              </div>
+<div style="margin-bottom:15px;">
+<b>Bước 1:</b> Mở app → chọn <b>Máy Chủ</b> → chọn <b>VPN HCM</b> hoặc máy chủ khác
+</div>
 
-              <!-- Carrier Tabs -->
-              <div class="grid grid-cols-3 gap-2 bg-black/20 p-1.5 rounded-2xl">
-                <button v-for="s in sims" :key="s.id" @click="selectSim(s.id)"
-                  class="py-3 px-2 rounded-xl text-sm font-medium transition-all duration-300 relative overflow-hidden"
-                  :class="sim === s.id ? 'text-white shadow-lg bg-surfaceHighlight' : 'text-textMuted hover:text-white hover:bg-white/5'">
-                  <span class="relative z-10">{{ s.name }}</span>
-                  <div v-if="sim === s.id"
-                    class="absolute bottom-0 left-0 h-0.5 w-full bg-gradient-to-r from-transparent via-primary to-transparent">
-                  </div>
-                </button>
-              </div>
+<img src="https://i.ibb.co/8DTzj7cm/IMG-1451.jpg" style="width:70%;max-width:300px;border-radius:14px;margin:15px auto;display:block;">
 
-              <!-- Package Details -->
-              <div v-if="sim" class="animate-fade-in space-y-4 pt-2">
+<div style="margin-bottom:15px;">
+<b>Bước 2:</b> Quay lại trang chính → bấm <b>Chạm Để Bắt Đầu</b>
+</div>
 
-                <!-- Alert Box -->
-                <div class="p-4 rounded-xl border border-yellow-500/20 bg-yellow-500/5 flex gap-3 items-start">
-                  <i class="fas fa-info-circle text-yellow-500 mt-0.5"></i>
-                  <p class="text-xs text-yellow-200/80 leading-relaxed">
-                    Đăng ký nền là bắt buộc , không đăng ký sẽ không dùng được 4G - 5G đâu
-                  </p>
-                </div>
+<div style="margin-bottom:15px;">
+<b>Bước 3:</b> Chờ vài giây → hiện <b>Đã Kết Nối</b> là thành công ✅
+</div>
 
-                <!-- Packages List -->
-                <div class="grid gap-3">
-                  <div v-for="(pkg, idx) in getCurrentPackages()" :key="idx"
-                    class="group p-5 rounded-2xl bg-black/40 border border-white/5 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-pointer relative"
-                    @click="handlePackageAction(pkg)">
-                    <div class="flex justify-between items-start mb-2">
-                      <div class="flex-1">
-                        <div class="font-bold text-white text-lg leading-tight">{{ pkg.name }}</div>
-                        <div class="text-sm text-textMuted mt-1">{{ pkg.desc }}</div>
-                      </div>
-                      <div
-                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors ml-3 shrink-0">
-                        <i :class="pkg.icon"></i>
-                      </div>
-                    </div>
+<img src="https://i.ibb.co/BXFWfgY/IMG-1219.jpg" style="width:70%;max-width:300px;border-radius:14px;margin:15px auto;display:block;">
 
-                    <!-- NEW: Features Specs List -->
-                    <div v-if="pkg.specs && pkg.specs.length > 0" class="mb-4 space-y-1.5">
-                      <div v-for="(spec, sIdx) in pkg.specs" :key="sIdx"
-                        class="flex items-center gap-2 text-xs font-medium">
-                        <i class="fas fa-check-circle text-green-500/80 text-[10px]"></i>
-                        <span class="text-gray-300">{{ spec }}</span>
-                      </div>
-                    </div>
+</div>
 
-                    <div class="pt-4 border-t border-white/5 flex justify-between items-center">
-                      <span class="text-xs font-mono font-bold text-white bg-white/10 px-2.5 py-1 rounded-lg">{{
-                        pkg.price }}</span>
-                      <span class="text-xs text-primary font-medium group-hover:underline flex items-center gap-1">
-                        Đăng ký ngay <i class="fas fa-arrow-right text-[10px]"></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
 
-                <button @click="nextStep"
-                  class="w-full py-4 mt-4 bg-primary hover:bg-primaryDark text-white rounded-2xl font-semibold shadow-lg shadow-blue-900/20 transition-all active:scale-[0.98]">
-                  Tôi đã đăng ký xong
-                </button>
-              </div>
-            </div>
-          </div>
+<div class="card" style="padding:20px;border-radius:18px;background:#201217;border:1px solid #7a2b2b;margin-bottom:20px;">
 
-          <!-- Step 4: Platform Selection -->
-          <div v-else-if="step === 4" key="step4" class="space-y-6 animate-slide-up">
-            <div class="glass-panel p-6 sm:p-8 rounded-[2rem]">
-              <h3 class="text-xl font-semibold mb-6">Chọn Loại Nền</h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <button v-for="plat in platforms" :key="plat.id" @click="selectPlatform(plat.id)" 
-                        class="relative group p-6 rounded-2xl border border-white/5 bg-gradient-to-br from-surface to-surfaceHighlight text-left transition-all duration-300 hover:border-white/10" 
-                        :class="platform === plat.id ? `ring-2 ring-${plat.color}-500 bg-${plat.color}-900/10` : ''">
-                      <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform" 
-                           :class="`bg-${plat.color}-500/20 text-${plat.color}-400`">
-                          <i :class="plat.icon"></i>
-                      </div>
-                      <div class="font-semibold text-lg">{{ plat.name }}</div>
-                      <div class="text-textMuted text-sm mt-1">{{ plat.desc }}</div>
-                  </button>
-              </div>
-            </div>
-          </div>
+<h3>⚠️ VPN cần chạy nền</h3>
 
-          <!-- Step 5: OS Selection -->
-          <div v-else-if="step === 5" key="step5" class="space-y-6 animate-slide-up">
-            <div class="glass-panel p-6 sm:p-8 rounded-[2rem]">
-              <h3 class="text-xl font-semibold mb-6">Thiết bị sử dụng</h3>
+<p>
+Đây là app VPN nên phải <b>để chạy nền</b>.  
+Nếu tắt hẳn app sẽ mất kết nối mạng.  
+Chỉ cần thoát app, <b>không đóng hoàn toàn</b>.
+</p>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <button v-for="device in devices" :key="device.id" @click="selectOs(device.id)"
-                  class="relative group p-6 rounded-2xl border border-white/5 bg-gradient-to-br from-surface to-surfaceHighlight text-left transition-all duration-300"
-                  :class="[
-                    os === device.id ? `ring-2 ring-${device.color}-500 bg-${device.color}-900/10` : 'hover:border-white/10'
-                  ]">
-                  <div
-                    class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform"
-                    :class="`bg-${device.color}-500/20 text-${device.color}-400`">
-                    <i :class="device.icon"></i>
-                  </div>
-                  <div class="font-semibold text-lg">{{ device.name }}</div>
-                  <div class="text-textMuted text-sm mt-1">{{ device.desc }}</div>
-                </button>
-              </div>
-            </div>
+</div>
 
-            <!-- App Selection & Download Link (Dynamic) -->
-            <div v-if="currentApps?.length > 0" class="glass-panel p-6 rounded-[2rem] animate-fade-in border-l-4" :class="os && os.includes('android') ? 'border-green-500' : 'border-blue-500'">
-                
-                <!-- Single App Logic (Direct Download) -->
-                <div v-if="currentApps?.length === 1">
-                    <div v-for="item in currentApps" :key="item.name">
-                        <div class="flex flex-col sm:flex-row items-center gap-6 mb-4">
-                            <div class="flex-1">
-                                <h4 class="font-bold text-lg mb-2">Tải ứng dụng {{ item.name }}</h4>
-                                <p class="text-textMuted text-sm">{{ item.desc }}</p>
-                            </div>
-                            <div class="flex flex-col gap-2 shrink-0">
-                                <a v-if="item.link" :href="item.link" :target="item.link === '#platformnext' ? '_self' : '_blank'"
-                                   class="px-6 py-3 rounded-xl font-medium shadow-lg flex items-center justify-center gap-2 transition-all text-white"
-                                   :class="os && os.includes('android') ? 'bg-green-600 hover:bg-green-700 shadow-green-900/20' : 'bg-blue-600 hover:bg-blue-700 shadow-blue-900/20'">
-                                    <i :class="item.icon"></i> Tải về
-                                </a>
 
-                            </div>
-                        </div>
-                        
-                        <!-- Specs/Notes for Single App -->
-                        <div v-if="item.specs && item.specs.length > 0" class="p-4 mb-4 rounded-xl border border-yellow-500/20 bg-yellow-500/5">
-                             <div class="flex items-start gap-2 mb-2">
-                                <i class="fas fa-info-circle text-yellow-500 mt-1"></i>
-                                <strong class="text-yellow-200 text-base">Lưu ý:</strong>
-                              </div>
-                              <ul class="space-y-1.5 text-sm text-yellow-200/80 list-disc ml-5 leading-relaxed">
-                                <li v-for="spec in item.specs">{{ spec }}</li>
-                              </ul>
-                        </div>
+<div class="card" style="padding:20px;border-radius:18px;background:#0f1320;margin-bottom:20px;">
 
-                        <button @click="nextStep"
-                            class="w-full mt-2 py-3 border border-white/10 hover:bg-white/5 rounded-xl text-sm font-medium transition-colors">
-                            Đã cài đặt xong, tiếp tục &rarr;
-                        </button>
-                    </div>
-                </div>
+<h3>🔄 Cập nhật / Làm mới máy chủ</h3>
 
-                <!-- Multiple Apps Logic (Selection) -->
-                <div v-else class="space-y-4">
-                    <h4 class="font-bold text-lg">Chọn ứng dụng</h4>
-                    <div class="grid gap-3">
-                        <button v-for="(item, idx) in currentApps" :key="idx" @click="app = item.name"
-                            class="relative flex items-center gap-4 p-4 rounded-xl border border-white/5 hover:bg-white/5 transition-all"
-                            :class="app === item.name ? (os && os.includes('android') ? 'bg-green-500/10 border-green-500/50' : 'bg-blue-500/10 border-blue-500/50') : ''">
-                            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white text-xl"
-                                :class="os && os.includes('android') ? 'bg-green-600' : 'bg-indigo-600'">
-                                <i :class="item.icon"></i>
-                            </div>
-                            <div class="text-left flex-1">
-                                <div class="font-semibold">{{ item.name }}</div>
-                                <div class="text-xs text-textMuted">{{ item.desc }}</div>
-                            </div>
-                            <div v-if="app === item.name" class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs">
-                                <i class="fas fa-check"></i>
-                            </div>
-                        </button>
-                    </div>
+<div style="margin-bottom:10px;">
+<b>Bước 1:</b> Trong trang chính hoặc sau khi đã kết nối → bấm vào <b>Máy Chủ</b>
+</div>
 
-                    <!-- Selected App Info/Notes -->
-                    <div v-if="app" class="pt-4 border-t border-white/5 animate-fade-in">
-                         <div v-for="item in currentApps" :key="item.name">
-                            <div v-if="app === item.name">
-                                <!-- Specs/Notes -->
-                                <div v-if="item.specs && item.specs.length > 0" class="p-4 mb-4 rounded-xl border border-yellow-500/20 bg-yellow-500/5">
-                                     <div class="flex items-start gap-2 mb-2">
-                                        <i class="fas fa-info-circle text-yellow-500 mt-1"></i>
-                                        <strong class="text-yellow-200 text-base">Lưu ý:</strong>
-                                      </div>
-                                      <ul class="space-y-1.5 text-sm text-yellow-200/80 list-disc ml-5 leading-relaxed">
-                                        <li v-for="spec in item.specs">{{ spec }}</li>
-                                      </ul>
-                                </div>
+<div style="margin-bottom:10px;">
+<b>Bước 2:</b> Bấm nút <b>Làm Mới</b> góc trên phải để tải danh sách server mới
+</div>
 
-                                <a v-if="item.link" :href="item.link" :target="item.link === '#platformnext' ? '_self' : '_blank'"
-                                   class="block w-full py-3 rounded-xl text-center font-bold text-white mb-2"
-                                   :class="os && os.includes('android') ? 'bg-green-600 hover:bg-green-700' : 'bg-blue-600 hover:bg-blue-700'">
-                                   <i :class="item.icon" class="mr-2"></i>Tải {{ item.name }}
-                                </a>
+<div style="margin-bottom:15px;">
+<b>Bước 3:</b> Chọn lại <b>VPN HCM</b> → quay lại kết nối
+</div>
 
-                                <button @click="nextStep"
-                                  class="w-full py-3 border border-white/10 hover:bg-white/5 rounded-xl text-sm font-medium transition-colors">
-                                  Tôi đã cài xong &rarr;
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+<img src="https://i.ibb.co/bMvrqYRz/IMG-1218.jpg" style="width:40%;max-width:180px;border-radius:12px;">
+<img src="https://i.ibb.co/BXFWfgY/IMG-1219.jpg" style="width:40%;max-width:180px;border-radius:12px;">
+</div>
 
-            <!-- PlatformNext External Downloads -->
-            <div id="platformnext" v-if="os && showPlatformNext && filteredPlatformNextApps.length > 0 && currentApps.some(app => app.use_platform_next)" class="glass-panel p-6 rounded-[2rem] animate-fade-in border-l-4 border-purple-500">
-                <div class="flex items-center gap-3 mb-2">
-                    <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h4 class="font-bold text-lg text-white">Ứng dụng PlatformNext</h4>
-                </div>
-                <!-- Dynamic text based on OS -->
-                <p class="text-textMuted text-xs mb-4 ml-11">Cài đặt trực tiếp cho thiết bị {{ os.toUpperCase() }} của bạn</p>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <a v-for="pnApp in filteredPlatformNextApps" :key="pnApp.id" :href="pnApp.processedLink" target="_blank"
-                       class="px-4 py-3 rounded-xl font-medium shadow-lg flex flex-col transition-all text-white border border-white/5 hover:scale-[1.02]"
-                       :class="pnApp.colorClass">
-                        <div class="flex items-center justify-between">
-                            <span class="flex items-center gap-2 text-sm"><i :class="pnApp.icon"></i> {{ pnApp.niceName }}</span>
-                            <span v-if="pnApp.size" class="text-xs bg-black/30 px-2 py-0.5 rounded text-white/80">{{ pnApp.size }}</span>
-                        </div>
-                    </a>
-                </div>
+</div>
 
-                <div v-if="currentApps?.length === 0" class="mt-4 pt-4 border-t border-white/5">
-                    <button @click="nextStep"
-                      class="w-full py-3 border border-white/10 hover:bg-white/5 rounded-xl text-sm font-medium transition-colors">
-                      Tôi đã cài xong, tiếp tục &rarr;
-                    </button>
-                </div>
-            </div>
-          </div>
 
-          <!-- Step 6: Instructions -->
-          <div v-else-if="step === 6" key="step6"
-            class="glass-panel rounded-[2rem] shadow-2xl animate-fade-in flex flex-col h-[600px] overflow-hidden">
-            <div
-              class="p-6 border-b border-border bg-surface/50 backdrop-blur-md sticky top-0 z-20 flex justify-between items-center">
-              <div>
-                <h3 class="font-bold text-lg">Hướng dẫn thiết lập</h3>
-                <p class="text-xs text-textMuted uppercase tracking-wider font-semibold">
-                  {{ os }} &bull; {{ app ? app.toUpperCase() : 'NAPSTERNETV' }}
-                </p>
-              </div>
-              <button @click="resetFlow"
-                class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 hover:text-white text-textMuted transition-colors"
-                title="Trang chủ">
-                <i class="fas fa-home"></i>
-              </button>
-            </div>
+<div style="background:#0f2a38;border:1px solid #1c5d7a;padding:15px;border-radius:14px;margin-bottom:20px;">
+💡 <b>Khi nào cần làm mới?</b> Khi không tìm thấy server, kết nối bị lỗi hoặc sau khi bật tắt máy bay.
+</div>
 
-            <!-- Scrollable Content Area -->
-            <div class="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar">
-              <div v-for="(item, index) in currentTutorial" :key="index" class="relative pl-8 group">
-                <!-- Timeline Line -->
-                <div class="absolute left-3 top-0 bottom-0 w-0.5 bg-border group-last:bottom-auto group-last:h-6"></div>
-                <!-- Timeline Dot -->
-                <div
-                  class="absolute left-0 top-1 w-6 h-6 rounded-full bg-surface border-2 border-primary text-primary text-xs font-bold flex items-center justify-center shadow-[0_0_10px_rgba(59,130,246,0.3)]">
-                  {{ index + 1 }}
-                </div>
 
-                <div class="mb-2 font-medium text-lg text-white">{{ item.text }}</div>
-                <div v-if="item.img"
-                  class="mt-3 rounded-2xl overflow-hidden border border-white/5 shadow-2xl bg-black/50">
-                  <img :src="item.img"
-                    class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
-                    loading="lazy">
-                </div>
-              </div>
+<div class="card" style="padding:20px;border-radius:18px;background:#0f1320;">
 
-              <div class="p-8 text-center space-y-4 pt-12">
-                <div
-                  class="w-16 h-16 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-2 animate-bounce">
-                  <i class="fas fa-check"></i>
-                </div>
-                <h4 class="text-xl font-bold text-white">Hoàn tất!</h4>
-                <p class="text-textMuted text-sm">Bây giờ bạn có thể truy cập mạng.</p>
-                <button @click="resetFlow"
-                  class="px-6 py-2 rounded-full border border-white/10 text-sm hover:bg-white/5 transition-colors">
-                  Thực hiện lại
-                </button>
-              </div>
-            </div>
-          </div>
+<h3>✅ Kết nối chậm / không ổn định</h3>
 
-        </transition>
+<div style="margin-bottom:10px;">
+<b>1.</b> Vào <b>Máy Chủ</b> → bấm <b>Làm Mới</b> → chọn server ping thấp
+</div>
 
-        <!-- Mobile Navigation (Bottom) -->
-        <div v-if="step > 1" class="lg:hidden mt-6 flex justify-between items-center px-2">
-          <button @click="prevStep"
-            class="text-textMuted hover:text-white flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg hover:bg-white/5 transition-all">
-            <i class="fas fa-arrow-left"></i> Quay lại
-          </button>
-        </div>
+<div style="margin-bottom:10px;">
+<b>2.</b> Ngắt kết nối → chờ 5 giây → kết nối lại
+</div>
 
-      </div>
+<div style="margin-bottom:10px;">
+<b>3.</b> Kiểm tra tín hiệu <b>4G Viettel</b>
+</div>
+
+<div>
+<b>4.</b> Nếu vẫn chậm → khởi động lại app
+</div>
+
+</div>
+
+</div>
+<div class="container">
+
+<!-- MUA GÓI -->
+
+<div id="buy" class="section active" style="max-width:600px;margin:auto;">
+
+<div style="
+background:linear-gradient(180deg,#1a1f45,#0f1330);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:24px;
+padding:24px;
+margin-bottom:22px;
+box-shadow:0 20px 40px rgba(0,0,0,.45);
+">
+
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;">
+
+<div style="
+width:44px;
+height:44px;
+border-radius:14px;
+background:linear-gradient(135deg,#7b5cff,#4ea1ff);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+">
+🛒
+</div>
+
+<h3 style="margin:0;font-size:20px;">Mua gói tại website chính thức</h3>
+
+</div>
+
+<p style="opacity:.8;margin-bottom:18px;">
+Truy cập website để xem các gói hiện có và mua gói VPN.
+</p>
+
+<a href="https://vpnsieucap.shop"
+style="
+display:flex;
+align-items:center;
+gap:14px;
+padding:18px;
+border-radius:18px;
+background:linear-gradient(90deg,#7b5cff,#5c7cff);
+text-decoration:none;
+color:white;
+font-weight:600;
+box-shadow:0 8px 20px rgba(123,92,255,.4);
+">
+
+🌐
+
+<div>
+<div style="font-size:18px;">vpnsieucap.shop</div>
+<div style="font-size:13px;opacity:.8;">Website mua gói chính thức</div>
+</div>
+
+</a>
+
+</div>
+
+
+<h3 style="margin:28px 0 14px 0;">📌 Hướng dẫn phân biệt các loại gói</h3>
+
+
+<div style="
+background:linear-gradient(180deg,#10332e,#0b211f);
+border:1px solid #1f6f6a;
+padding:20px;
+border-radius:20px;
+margin-bottom:16px;
+">
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+
+<h4 style="margin:0;">
+🇻🇳 Cờ Việt Nam +
+<span style="
+background:#29c28a;
+padding:4px 10px;
+border-radius:12px;
+font-size:13px;
+font-weight:700;
+margin-left:5px;
+">
+Tên có TV360
+</span>
+</h4>
+
+<div style="
+background:#1f6f6a;
+padding:6px 12px;
+border-radius:30px;
+font-size:13px;
+font-weight:600;
+">
+Cần Nền TV360‼️
+</div>
+
+</div>
+
+<p style="margin-top:10px;">
+Gói Viettel – Cần nền TV360
+</p>
+
+<p style="opacity:.9;">
+Dành cho <b>sim Viettel</b>. Phải đăng ký thêm <b>Gói Nền TV360</b> mới sử dụng được.
+</p>
+
+</div>
+
+
+<div style="
+background:linear-gradient(180deg,#332510,#201707);
+border:1px solid #7a5a1f;
+padding:20px;
+border-radius:20px;
+margin-bottom:16px;
+">
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+
+<h4 style="margin:0;">
+🇻🇳 Cờ Việt Nam +
+<span style="
+background:#ff9f43;
+padding:4px 10px;
+border-radius:12px;
+font-size:13px;
+font-weight:700;
+margin-left:5px;
+">
+Không có TV360
+</span>
+</h4>
+
+<div style="
+background:#7a5a1f;
+padding:6px 12px;
+border-radius:30px;
+font-size:13px;
+font-weight:600;
+">
+Cần Nền TikTok‼️
+</div>
+
+</div>
+
+<p style="margin-top:10px;">
+Gói sim Việt Nam – cần Nền TikTok
+</p>
+
+<p style="opacity:.9;">
+Gói dành cho <b>các sim Việt Nam</b> (Viettel, Vinaphone, Mobifone...). Phải đăng ký thêm <b>Gói Nền TikTok</b> mới sử dụng được. Dùng app <b>v2RayTun / Happ / Shadowrocket</b> để kết nối.
+</p>
+
+</div>
+
+
+<div style="
+background:linear-gradient(180deg,#33101a,#1b080d);
+border:1px solid #7a1f3d;
+padding:20px;
+border-radius:20px;
+margin-bottom:16px;
+">
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+
+<h4 style="margin:0;">🇯🇵 Gói Nhật Bản</h4>
+
+<div style="
+background:#7a1f3d;
+padding:6px 12px;
+border-radius:30px;
+font-size:13px;
+font-weight:600;
+">
+Sim Nhật
+</div>
+
+</div>
+
+<p style="margin-top:10px;">
+Gói internet tại Nhật Bản
+</p>
+
+<p style="opacity:.9;">
+Gói dành cho <b>sim Nhật Bản</b>. Dùng app <b>v2RayTun / Happ / Shadowrocket</b> để kết nối.
+</p>
+
+</div>
+
+
+<div style="
+background:#2a1016;
+border:1px solid #7a2b2b;
+padding:20px;
+border-radius:20px;
+">
+
+<h4 style="margin-top:0;">⚠️ Lưu ý quan trọng</h4>
+
+<p style="opacity:.9;">
+<b>Không hỗ trợ hoàn tiền</b>.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ĐĂNG KÝ NỀN TV360 -->
+<div id="tv360" class="section" style="max-width:600px;margin:auto;font-family:sans-serif;">
+
+<div class="notice" style="
+background:linear-gradient(135deg,#0f2d2a,#123c38);
+border:1px solid #1f6f6a;
+padding:10px 14px;
+border-radius:12px;
+color:#d1fae5;
+margin-bottom:12px;
+font-size:14px;">
+Dành cho gói <b>TV360</b>. Cần đăng ký nền để sử dụng <b>Gói TV360</b>.
+</div>
+
+<div style="
+background:linear-gradient(180deg,#1a1f45,#0f1330);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:24px;
+padding:22px;
+margin-bottom:22px;
+box-shadow:0 25px 50px rgba(0,0,0,.5);
+">
+
+<!-- HEADER -->
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+<div style="
+width:46px;
+height:46px;
+border-radius:14px;
+background:linear-gradient(135deg,#22c55e,#16a34a);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+box-shadow:0 6px 15px rgba(0,255,120,.3);
+">
+📺
+</div>
+
+<h3 style="margin:0;font-size:20px;color:#fff;">Đăng ký nền TV360</h3>
+</div>
+
+<!-- LƯU Ý -->
+<div style="
+background:linear-gradient(135deg,#3b1c1c,#1f0a0a);
+border:1px solid #ff6b6b;
+padding:14px;
+border-radius:14px;
+margin-bottom:16px;
+color:#ffe4e4;
+font-size:14px;
+line-height:1.6;
+">
+<b>⚠️ Lưu ý:</b><br>
+Chỉ cần đăng ký <b>1 trong 2 cách</b> bên dưới. <b>Gói 5GSPORT (15.000đ)</b> rẻ hơn gói <b>V Cine (20.000đ)</b> — nếu không có nhu cầu đặc biệt hãy chọn <b>5GSPORT</b> để tiết kiệm hơn.
+</div>
+
+<!-- CÁCH 2 (highlight) -->
+<div style="
+background:linear-gradient(135deg,#16a34a,#15803d);
+border-radius:16px;
+padding:15px;
+margin-bottom:12px;
+position:relative;
+box-shadow:0 10px 25px rgba(0,255,120,.25);
+color:#fff;
+">
+
+<div style="
+position:absolute;
+top:-10px;
+right:12px;
+background:#fff;
+color:#16a34a;
+font-size:11px;
+padding:4px 8px;
+border-radius:999px;
+font-weight:700;
+">
+🔥 KHUYÊN DÙNG
+</div>
+
+<b>💡 Cách 2:</b><br>
+Soạn <b>5GSPORT</b> gửi <b>191</b><br>
+💰 <b>15.000đ / 30 ngày</b>
+
+</div>
+
+<!-- CÁCH 1 -->
+<div style="
+background:#0f2c26;
+border:1px solid #1f6f6a;
+padding:14px;
+border-radius:14px;
+margin-bottom:15px;
+color:#d1fae5;
+">
+<b>💡 Cách 1:</b><br>
+Soạn <b>DK PH</b> gửi <b>1331</b> → Sau đó soạn <b>YPH</b> để xác nhận<br>
+💰 <b>20.000đ / 30 ngày</b>
+</div>
+
+<!-- ẢNH -->
+<div style="display:flex;gap:10px;justify-content:center;">
+<div style="flex:1;text-align:center;">
+    <img src="https://i.ibb.co/TqwMg9Z7/IMG-1304.jpg"
+    style="width:100%;border-radius:12px;">
+    <div style="font-size:12px;color:#c7d2fe;margin-top:6px;font-weight:600;">
+    Cách 1
     </div>
+</div>
+
+<div style="flex:1;text-align:center;">
+    <img src="https://i.ibb.co/4wSLvXH5/IMG-1353.jpg"
+    style="width:100%;border-radius:12px;">
+    <div style="font-size:12px;color:#c7d2fe;margin-top:6px;font-weight:600;">
+    Cách 2 
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+<!-- TẢI APP -->
+<div id="download" class="section">
+
+<div class="notice" style="background:#0f2d2a;border:1px solid #1f6f6a;">
+✅ Hướng dẫn này dành cho <b>gói TV360</b> – không cần Nền TikTok.
+</div>
+
+<!-- IOS -->
+
+<div class="card" style="background:#0f1320;border-radius:20px;border:1px solid rgba(255,255,255,.06);">
+
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+
+<div style="width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#22d3ee,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:22px;">
+
+</div>
+
+<h2 style="margin:0;">iOS – iPhone & iPad</h2>
+
+</div>
+
+<div style="background:#0f2c26;border:1px solid #1f6f6a;border-radius:14px;padding:15px;margin-bottom:18px;">
+
+<b style="color:#6df2c4;">✔ Tải trực tiếp từ App Store</b>
+
+<p style="opacity:.9;margin-top:6px;">
+Cài nhanh, không cần TestFlight.
+</p>
+
+</div>
+
+<a href="https://apps.apple.com/vn/app/platform-next-unlimited-vpn/id6741474000"
+style="display:block;background:linear-gradient(90deg,#3cd3ad,#4facfe);padding:16px;border-radius:16px;text-decoration:none;color:white;font-weight:bold;">
+
+ Tải trên App Store
+<div style="font-size:13px;font-weight:normal;opacity:.85;">
+Platform Next Unlimited VPN – Miễn phí
+</div>
+
+</a>
+
+</div>
+
+
+<!-- ANDROID -->
+
+<div class="card" style="background:#0f1320;border-radius:20px;border:1px solid rgba(255,255,255,.06);margin-top:20px;">
+
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+
+<div style="width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#34d399,#22c55e);display:flex;align-items:center;justify-content:center;font-size:22px;">
+🤖
+</div>
+
+<h2 style="margin:0;">Android</h2>
+
+</div>
+
+<div style="background:#0f2c26;border:1px solid #1f6f6a;border-radius:14px;padding:15px;margin-bottom:18px;">
+
+<b style="color:#6df2c4;">✔ Cách 1 – Tải trực tiếp từ CH Play </b>
+
+<p style="opacity:.9;margin-top:6px;">
+Cài nhanh, tự cập nhật tự động.
+</p>
+
+</div>
+
+<a href="https://play.google.com/store/apps/details?id=dev.platformnext.vpn"
+style="display:block;background:linear-gradient(90deg,#22c55e,#16a34a);padding:16px;border-radius:16px;text-decoration:none;color:white;font-weight:bold;">
+
+🤖 Tải trên CH Play
+<div style="font-size:13px;font-weight:normal;opacity:.85;">
+Platform Next Unlimited VPN – Miễn phí
+</div>
+
+</a>
+
+<div style="height:1px;background:linear-gradient(90deg,transparent,#4f46e5,transparent);margin:24px 0;"></div>
+
+<h3>Cách 2 – Tải file APK trực tiếp</h3>
+
+<div style="display:flex;gap:12px;margin-top:12px;">
+
+<div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#6366f1);display:flex;align-items:center;justify-content:center;font-weight:bold;">
+1
+</div>
+
+<div>Bấm nút bên dưới để tải file <b>APK</b></div>
+
+</div>
+
+<div style="display:flex;gap:12px;margin-top:12px;">
+
+<div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#6366f1);display:flex;align-items:center;justify-content:center;font-weight:bold;">
+2
+</div>
+
+<div>Mở file → chọn <b>Cài đặt</b> (cho phép cài từ nguồn khác nếu được hỏi)</div>
+
+</div>
+
+<a href="https://vpnsieucap.shop/tai-app.html"
+style="display:block;margin-top:18px;background:linear-gradient(90deg,#22c55e,#4ade80);padding:16px;border-radius:16px;text-decoration:none;color:white;font-weight:bold;">
+
+⬇ Tải APK Android
+<div style="font-size:13px;font-weight:normal;opacity:.85;">
+Cài trực tiếp – Không cần Play Store
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+<!--PHÁT WIFI-->
+
+<div id="wifi" class="section">
+<div class="notice" style="background:#0f2d2a;border:1px solid #1f6f6a;padding:15px;border-radius:14px;margin-bottom:20px;">
+✅ Hướng dẫn này dành cho <b>gói TV360</b>.
+</div>
+<div class="card" style="background:#0f1320;border-radius:22px;border:1px solid rgba(255,255,255,.06);">
+
+<!-- Tiêu đề -->
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:15px;">
+
+<div style="
+width:42px;
+height:42px;
+border-radius:12px;
+background:linear-gradient(135deg,#34d399,#22c55e);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+">
+🛜
+</div>
+
+<h3 style="margin:0;">Máy phát WiFi – Cài proxy trong app VPN</h3>
+
+</div>
+
+<!-- Step 1 -->
+<div style="display:flex;gap:12px;margin-top:10px;">
+
+<div style="
+width:30px;
+height:30px;
+border-radius:50%;
+background:linear-gradient(135deg,#7c3aed,#6366f1);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+flex:0 0 30px;
+">
+1
+</div>
+
+<div>
+Bật VPN trước → vào app → bấm <b>Cài đặt</b> (biểu tượng ⚙️ góc trên)
+</div>
+
+</div>
+
+<div class="img-box">
+  <img src="https://sieu-vpn.indevs.in/banmayphat.jpg">
+  <div class="img-caption">Mở app VPN → bấm biểu tượng Cài đặt</div>
+</div>
+
+<!-- Step 2 -->
+<div style="display:flex;gap:12px;margin-top:10px;">
+
+<div style="
+width:30px;
+height:30px;
+border-radius:50%;
+background:linear-gradient(135deg,#7c3aed,#6366f1);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+flex:0 0 30px;
+">
+2
+</div>
+
+<div>
+Bật toggle <b>"Chia Sẻ Qua Proxy"</b>
+</div>
+
+</div>
+
+<!-- Step 3 -->
+<div style="display:flex;gap:12px;margin-top:10px;">
+
+<div style="
+width:30px;
+height:30px;
+border-radius:50%;
+background:linear-gradient(135deg,#7c3aed,#6366f1);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+flex:0 0 30px;
+">
+3
+</div>
+
+<div>
+Ghi lại <b>IP Proxy</b> và <b>Cổng</b> hiển thị để dùng cho máy nhận
+</div>
+
+</div>
+
+<div class="img-box">
+  <img src="https://sieu-vpn.indevs.in/benmayphat1.jpg">
+  <div class="img-caption">Bật Chia Sẻ Qua Proxy → ghi lại IP Proxy và Cổng</div>
+</div>
+
+<!-- Cảnh báo -->
+<div style="
+background:#2a1616;
+border:1px solid #ff5e5e;
+padding:14px;
+border-radius:14px;
+margin-top:15px;
+">
+⚠️ Máy phát phải <b>đang chạy VPN</b> và <b>đang phát WiFi</b> cùng lúc
+</div>
+
+<!-- Ghi chú -->
+<div style="
+background:#3a2a12;
+border:1px solid #ffb020;
+padding:14px;
+border-radius:14px;
+margin-top:15px;
+">
+
+<b>💡 Nhấn giữ để sao chép</b><br><br>
+
+Nhấn giữ vào <b>IP Proxy</b> để sao chép nhanh.  
+Chỉ cần dùng 1 trong các IP. Nếu lỗi → đổi IP khác.
+</div> 
+</div>
+
+<!-- MÁY NHẬN WIFI -->
+
+<div class="card" style="background:#0f1320;border-radius:22px;border:1px solid rgba(255,255,255,.06);margin-top:20px;">
+
+<!-- Tiêu đề -->
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:15px;">
+
+<div style="
+width:42px;
+height:42px;
+border-radius:12px;
+background:linear-gradient(135deg,#7b5cff,#4ea1ff);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+">
+📱
+</div>
+
+<h3 style="margin:0;">Máy nhận WiFi – Cài Proxy</h3>
+
+</div>
+
+<!-- STEP 1 -->
+<div style="display:flex;gap:12px;margin-top:10px;">
+<div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#6366f1);display:flex;align-items:center;justify-content:center;font-weight:bold;flex:0 0 30px;">1</div>
+<div>
+Kết nối WiFi từ máy phát → vào <b>Cài đặt > WiFi</b> → bấm biểu tượng <b>ⓘ</b>
+</div>
+</div>
+ 
+<div class="img-box">
+  <img src="https://sieu-vpn.indevs.in/benmaynhan.png">
+  <div class="img-caption">Bấm biểu tượng ⓘ cạnh Wifi đang kết nối</div>
+</div>
+
+<!-- STEP 2 -->
+<div style="display:flex;gap:12px;margin-top:10px;">
+<div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#6366f1);display:flex;align-items:center;justify-content:center;font-weight:bold;flex:0 0 30px;">2</div>
+<div>
+Cuộn xuống → tìm mục <b>Proxy</b> → chọn <b>Thủ công</b>
+</div>
+</div>
+
+<div style="display:flex;gap:10px;justify-content:center;">
+
+  <div class="img-box">
+    <img src="https://sieu-vpn.indevs.in/benmaynhan1.png">
+    <div class="img-caption">Tìm mục Proxy</div>
   </div>
 
-  <!-- Footer -->
-  <div class="w-full text-center py-6 text-xs text-textMuted/50 font-mono">
-    VPNSIEUCAP.SHOP
+  <div class="img-box">
+    <img src="https://sieu-vpn.indevs.in/benmaynhan2.png">
+    <div class="img-caption">Chọn Thủ công</div>
   </div>
 
-  <script src="assets/js/app.js?v=1778339474"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"5c8cfa7b37d54bfeacb68c458b15113f","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</div>
+
+<!-- STEP 3 -->
+<div style="display:flex;gap:12px;margin-top:15px;">
+<div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#6366f1);display:flex;align-items:center;justify-content:center;font-weight:bold;flex:0 0 30px;">3</div>
+<div>
+Nhập <b>IP Proxy</b> vào <b>Tên máy chủ</b> và <b>Cổng</b> → lưu lại
+</div>
+</div>
+
+<div class="img-box">
+  <img src="https://sieu-vpn.indevs.in/benmaynhan3.png">
+  <div class="img-caption">Nhập IP Proxy vào Tên máy chủ và số Cổng</div>
+</div>
+
+<!-- SUCCESS -->
+<div style="background:#0f2c26;border:1px solid #29c28a;padding:14px;border-radius:14px;margin-top:15px;">
+✅ Xong! Máy nhận sẽ dùng được mạng VPN từ máy phát
+</div>
+
+<!-- WARNING -->
+<div style="background:#2a1616;border:1px solid #ff5e5e;padding:14px;border-radius:14px;margin-top:15px;">
+
+⚠️ <b>Lưu ý quan trọng:</b><br><br>
+
+• Máy phát phải <b>bật VPN trước</b><br>
+• Không tắt <b>Chia sẻ WiFi qua Proxy</b><br>
+• Nếu mất mạng → kiểm tra lại <b>IP Proxy & Cổng</b><br>
+• Mỗi lần bật lại VPN → IP có thể thay đổi
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CÀI ĐẶT -->
+
+<div id="setup" class="section">
+
+<div class="notice">
+✅ Hướng dẫn dành cho <b>gói TV360</b>
+</div>
+
+
+<div class="card">
+
+<h3>🛡 Bước 1: Chọn Bạn Có Mã Mời?</h3>
+
+<div class="img-row">
+
+<div class="img-box">
+<img src="https://i.ibb.co/LzJSrLKV/IMG-1221.jpg">
+<div class="img-caption">Mở app lần đầu</div>
+</div>
+
+<div class="img-box">
+<img src="https://sieu-vpn.indevs.in/anhnhapma2.jpg">
+<div class="img-caption">Chọn Bạn Có Mã Mời?</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🛡 Bước 2: Nhập mã mời</h3>
+
+<p>Bật <b>Bạn Có Mã Mời?</b> và nhập mã <b>vpn</b></p>
+
+<div class="warning">
+
+⚠ Nhập chính xác <b>vpn</b> (viết thường)
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🛡 Bước 3: Đăng nhập</h3>
+
+<div class="img-row">
+
+<div class="img-box">
+<img src="https://sieu-vpn.indevs.in/dangnhap.jpg">
+<div class="img-caption">Nhập email & mật khẩu</div>
+</div>
+
+<div class="img-box">
+<img src="https://sieu-vpn.indevs.in/dangngapxong.jpg">
+<div class="img-caption">Đăng nhập thành công</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>⚠ Nếu chưa nhập mã</h3>
+
+<p>Vào Cài đặt trong app → Chọn cách dùng VPN → nhập mã</p>
+
+<div class="img-row">
+
+<div class="img-box">
+<img src="https://i.ibb.co/8LLDJYL7/IMG-1220.jpg">
+<div class="img-caption">Cài đặt</div>
+</div>
+
+<div class="img-box">
+<img src="https://i.ibb.co/LzJSrLKV/IMG-1221.jpg">
+<div class="img-caption">Chọn Bạn Có Mã Mời?</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+VPN Siêu Cấp ☃️ © 2026
+</footer>
+
+<script>
+
+function openTab(tab,btn){
+
+document.querySelectorAll(".section").forEach(e=>{
+e.classList.remove("active")
+})
+
+document.getElementById(tab).classList.add("active")
+
+document.querySelectorAll(".tabs button").forEach(e=>{
+e.classList.remove("active")
+})
+
+btn.classList.add("active")
+
+}
+const tabs = document.getElementById("tabs");
+const leftArrow = document.getElementById("arrowLeft");
+const rightArrow = document.getElementById("arrowRight");
+
+function checkArrows(){
+const scrollLeft = tabs.scrollLeft;
+const maxScroll = tabs.scrollWidth - tabs.clientWidth;
+
+// Ẩn trái
+if(scrollLeft <= 5){
+leftArrow.classList.add("hide");
+}else{
+leftArrow.classList.remove("hide");
+}
+
+// Ẩn phải
+if(scrollLeft >= maxScroll - 5){
+rightArrow.classList.add("hide");
+}else{
+rightArrow.classList.remove("hide");
+}
+}
+
+// Khi scroll
+tabs.addEventListener("scroll", checkArrows);
+
+// Khi load
+window.addEventListener("load", checkArrows);
+</script>
+
 </body>
-
 </html>

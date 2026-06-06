@@ -408,6 +408,7 @@
             <h3 class="text-xl font-bold mb-6 text-white text-center sm:text-left uppercase tracking-tight">Chọn Ứng Dụng VPN</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <button v-for="app in availableApps" :key="app.id" @click="selectedApp = app; nextStep()" class="p-5 rounded-xl border text-left transition-all duration-300 group glass-button hover:border-white/30 relative overflow-hidden flex flex-col h-full">
+                <div v-if="app.recommended" class="absolute top-0 right-0 px-3 py-1 bg-orange-500 text-white text-[9px] font-bold tracking-widest rounded-bl-lg uppercase shadow-lg z-20">Khuyên dùng</div>
                 <div class="flex items-center gap-4 mb-3 relative z-10">
                   <div class="w-10 h-10 rounded-lg bg-orange-500/20 text-orange-500 flex items-center justify-center border border-orange-500/30">
                     <i :class="app.icon" class="text-lg"></i>
@@ -572,12 +573,12 @@
         const availableApps = computed(() => {
           if (os.value === 'android') {
             return [
-              { id: 'v2ray', name: 'V2ray Tun', desc: 'Ứng dụng VPN đa giao thức, hoạt động ổn định và mượt mà trên hệ điều hành Android.', link: 'https://play.google.com/store/apps/details?id=com.v2raytun.android&hl=vi', icon: 'fas fa-rocket' },
+              { id: 'v2ray', name: 'V2ray Tun', desc: 'Ứng dụng VPN đa giao thức, hoạt động ổn định và mượt mà trên hệ điều hành Android.', link: 'https://play.google.com/store/apps/details?id=com.v2raytun.android&hl=vi', icon: 'fas fa-rocket', recommended: true },
               { id: 'happ', name: 'Happ', desc: 'Ứng dụng VPN mới với khả năng kết nối siêu tốc và giao diện cực kỳ dễ sử dụng.', link: 'https://play.google.com/store/search?q=happ+vpn', icon: 'fas fa-bolt' }
             ];
           } else if (os.value === 'ios') {
             return [
-              { id: 'shadowrocket', name: 'Shadowrocket', desc: 'App VPN quốc dân cho iPhone. Hỗ trợ tải miễn phí', link: 'https://apps.apple.com/us/app/shadowrocket/id932747118', icon: 'fas fa-paper-plane' },
+              { id: 'shadowrocket', name: 'Shadowrocket', desc: 'App VPN quốc dân cho iPhone. Hỗ trợ tải miễn phí', link: 'https://apps.apple.com/us/app/shadowrocket/id932747118', icon: 'fas fa-paper-plane', recommended: true },
               { id: 'happ', name: 'Happ', desc: 'Ứng dụng VPN mới với khả năng kết nối siêu tốc và giao diện cực kỳ dễ sử dụng.', link: 'https://apps.apple.com/vn/app/happ-proxy-utility/id6504287215?l=vi', icon: 'fas fa-bolt' }
             ];
           }
